@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <title>Flask App</title>
+</head>
+
+<body>
+    <h1 id="result">Hello</h1>
+</body>
+<script>
+    var source = new EventSource("/message");
+    source.onmessage = function (event) {
+        data = event.data
+        document.getElementById("result").innerHTML += data + "<br>";
+        if (data == "END-OF-STREAM") {
+            source.close()
+        }
+    };
+</script>
+
+</html>
